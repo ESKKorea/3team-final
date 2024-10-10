@@ -21,15 +21,29 @@
         OR (comp_id = #{compId,jdbcType=VARCHAR} AND type = #{type,jdbcType=VARCHAR})
     </update>
 
+<!--    <select id="getBlacklistStatus" resultType="com.javalab.board.dto.BlacklistDto">-->
+<!--        SELECT * FROM (-->
+<!--        SELECT * FROM blacklist-->
+<!--        WHERE-->
+<!--        (jobSeeker_id = #{id,jdbcType=VARCHAR} AND type = 'jobSeeker')-->
+<!--        OR (comp_id = #{id,jdbcType=VARCHAR} AND type = 'company')-->
+<!--        ORDER BY blacklist_date DESC-->
+<!--        ) WHERE ROWNUM = 1-->
+<!--    </select>-->
     <select id="getBlacklistStatus" resultType="com.javalab.board.dto.BlacklistDto">
         SELECT * FROM (
-        SELECT * FROM blacklist
+        SELECT *
+        FROM blacklist
         WHERE
         (jobSeeker_id = #{id,jdbcType=VARCHAR} AND type = 'jobSeeker')
         OR (comp_id = #{id,jdbcType=VARCHAR} AND type = 'company')
         ORDER BY blacklist_date DESC
-        ) WHERE ROWNUM = 1
+        )
+        WHERE ROWNUM = 1
     </select>
+
+
+
 
     <select id="getAllBlacklist" resultType="com.javalab.board.dto.BlacklistDto">
         SELECT * FROM blacklist ORDER BY blacklist_date DESC
